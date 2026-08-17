@@ -1,0 +1,70 @@
+{
+  "Random Forest": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "fpr": 0.0,
+    "confusion_matrix": [
+      [
+        1000,
+        0
+      ],
+      [
+        0,
+        1000
+      ]
+    ]
+  },
+  "SVM": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "fpr": 0.0,
+    "confusion_matrix": [
+      [
+        1000,
+        0
+      ],
+      [
+        0,
+        1000
+      ]
+    ]
+  },
+  "ANN": {
+    "accuracy": 0.9995,
+    "precision": 0.999000999000999,
+    "recall": 1.0,
+    "f1_score": 0.9995002498750625,
+    "fpr": 0.001,
+    "confusion_matrix": [
+      [
+        999,
+        1
+      ],
+      [
+        0,
+        1000
+      ]
+    ]
+  },
+  "Isolation Forest": {
+    "accuracy": 0.956,
+    "precision": 0.9191176470588235,
+    "recall": 1.0,
+    "f1_score": 0.9578544061302682,
+    "fpr": 0.088,
+    "confusion_matrix": [
+      [
+        912,
+        88
+      ],
+      [
+        0,
+        1000
+      ]
+    ]
+  }
+}

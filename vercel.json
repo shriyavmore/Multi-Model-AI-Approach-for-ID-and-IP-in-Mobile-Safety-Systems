@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "web-dashboard/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://intrusiondetecter.onrender.com/api/$1"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/web-dashboard/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/web-dashboard/index.html"
+    }
+  ]
+}

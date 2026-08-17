@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Mobile IDPS - AI Security Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Mobile CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <div class="app-mobile-container">
+        
+        <!-- TOP APP BAR -->
+        <header class="top-app-bar">
+            <div class="brand-mobile">
+                <div class="brand-icon-wrap">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="brand-info">
+                    <h1>Mobile IDPS</h1>
+                    <span>AI Security</span>
+                </div>
+            </div>
+
+            <div class="top-bar-actions">
+                <div class="status-dot-pill" id="global-status-pill">
+                    <span class="dot-pulse"></span>
+                    <span id="global-status-text">Online</span>
+                </div>
+                
+                <div class="icon-btn-wrap" id="btn-top-alerts" onclick="switchMobileTab('alerts')">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="badge-count" id="top-alerts-badge">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT CONTAINER -->
+        <main class="main-mobile-content">
+
+            <!-- ========================================== -->
+            <!-- TAB 1: MAIN MOBILE DASHBOARD (HOME)        -->
+            <!-- ========================================== -->
+            <!-- ========================================== -->
+            <!-- TAB 1: MAIN CONTINUOUS SECURITY DASHBOARD  -->
+            <!-- ========================================== -->
+            <section class="mobile-tab-content active" id="tab-home">
+                
+                <!-- UNIFIED SECURITY STATUS & RISK GAUGE -->
+                <div class="m-card security-status-card safe" id="home-status-card">
+                    <div class="shield-avatar safe" id="home-status-shield">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="status-title-group">
+                        <h2 id="home-status-headline">CONTINUOUS MONITORING ACTIVE</h2>
+                        <p id="home-status-subtext">Multi-Layer Security Layer • Live Analysis</p>
+                    </div>
+                </div>
+
+                <!-- UNIFIED RISK SCORE CARD -->
+                <div class="m-card risk-score-card">
+                    <div class="m-card-header" style="width:100%;">
+                        <h2><i class="fa-solid fa-chart-pie"></i> Unified Security Risk</h2>
+                        <span class="risk-status-badge badge-safe" id="home-risk-badge">LOW</span>
+                    </div>
+
+                    <div class="circular-gauge-wrapper">
+                        <svg class="circular-gauge-svg" viewBox="0 0 120 120">
+                            <circle class="gauge-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="gauge-progress" id="home-gauge-progress" cx="60" cy="60" r="50"
+                                    stroke="var(--accent-green)" stroke-dasharray="314.15" stroke-dashoffset="276"></circle>
+                        </svg>
+                        <div class="gauge-center-text">
+                            <span class="gauge-num" id="home-risk-score-val" style="color:var(--accent-green)">18</span>
+                            <span class="gauge-max">/ 100</span>
+                        </div>
+                    </div>
+
+                    <div class="metrics-summary-row">
+                        <div class="metric-cell">
+                            <span>Apps Analyzed</span>
+                            <strong id="home-metric-scanned">47</strong>
+                        </div>
+                        <div class="metric-cell">
+                            <span>Wi-Fi Security</span>
+                            <strong id="home-metric-wifi" style="color:var(--accent-green)">WPA2</strong>
+                        </div>
+                        <div class="metric-cell">
+                            <span>Surveillance Risk</span>
+                            <strong id="home-metric-room" style="color:var(--accent-green)">CLEAN</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LAYER 1: APPLICATION SECURITY CARD -->
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-mobile-screen-button"></i> Application Security</h2>
+                        <a class="header-link" onclick="switchMobileTab('apps')">View Apps</a>
+                    </div>
+
+                    <div class="threat-summary-grid" style="margin-bottom:0.75rem;">
+                        <div class="summary-chip-card safe">
+                            <span class="summary-chip-val" id="chip-low-count" style="color:var(--accent-green)">40</span>
+                            <span class="summary-chip-lbl">Low</span>
+                        </div>
+                        <div class="summary-chip-card suspicious">
+                            <span class="summary-chip-val" id="chip-med-count" style="color:var(--accent-yellow)">5</span>
+                            <span class="summary-chip-lbl">Medium</span>
+                        </div>
+                        <div class="summary-chip-card malicious">
+                            <span class="summary-chip-val" id="chip-high-count" style="color:#f97316">2</span>
+                            <span class="summary-chip-lbl">High</span>
+                        </div>
+                        <div class="summary-chip-card malicious" style="background:rgba(239,68,68,0.15)">
+                            <span class="summary-chip-val" id="chip-crit-count" style="color:var(--accent-red)">0</span>
+                            <span class="summary-chip-lbl">Critical</span>
+                        </div>
+                    </div>
+
+                    <div id="home-app-alert-banner" style="font-size:0.8rem; color:var(--text-secondary); background:rgba(255,255,255,0.03); padding:0.6rem 0.8rem; border-radius:10px; display:flex; align-items:center; gap:0.5rem;">
+                        <i class="fa-solid fa-circle-info text-cyan"></i>
+                        <span>Automatic application discovery & permission analysis active.</span>
+                    </div>
+                </div>
+
+                <!-- LAYER 2: NETWORK SECURITY CARD -->
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-wifi"></i> Network Security</h2>
+                        <a class="header-link" onclick="switchMobileTab('network')">Network Details</a>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+                        <div>
+                            <div style="font-weight:700; font-size:0.95rem;" id="home-wifi-name">Hotel_Guest</div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary);" id="home-wifi-meta">Wi-Fi • WPA2 Encrypted • Public/Guest</div>
+                        </div>
+                        <span class="badge badge-medium" id="home-wifi-risk-badge">MEDIUM RISK</span>
+                    </div>
+                    <p style="font-size:0.78rem; color:var(--text-muted);" id="home-wifi-desc">
+                        Potentially suspicious network. Shared local guest network detected.
+                    </p>
+                </div>
+
+                <!-- LAYER 3: ROOM / SURVEILLANCE SECURITY CARD -->
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-camera-rotate"></i> Room Security</h2>
+                        <a class="header-link" onclick="switchMobileTab('room')">Room Scan</a>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.5rem;">
+                        <div>
+                            <div style="font-size:0.85rem; font-weight:700;" id="home-room-status-txt">No Significant Risk</div>
+                            <div style="font-size:0.75rem; color:var(--text-secondary);" id="home-room-last-scan">Last Scan: 10 min ago</div>
+                        </div>
+                        <button class="btn-mobile btn-secondary-m btn-sm-m" style="width:auto; padding:0.4rem 0.85rem;" onclick="switchMobileTab('room')">
+                            <i class="fa-solid fa-expand"></i> Scan Room
+                        </button>
+                    </div>
+                </div>
+
+                <!-- RECENT ALERTS FEED -->
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-bell"></i> Recent Security Alerts</h2>
+                        <a class="header-link" onclick="switchMobileTab('alerts')">View All</a>
+                    </div>
+                    <div class="threats-list-mobile" id="home-recent-threats-list">
+                        <!-- Dynamic continuous monitoring events -->
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ========================================== -->
+            <!-- TAB 2: INSTALLED APPS                      -->
+            <!-- ========================================== -->
+            <section class="mobile-tab-content" id="tab-apps">
+                <div class="search-mobile-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="m-app-search" placeholder="Search installed apps..." oninput="filterInstalledApps()">
+                </div>
+
+                <div class="filter-chips-scroll">
+                    <button class="chip-btn active" data-app-filter="ALL" onclick="setAppsFilter('ALL', this)">All</button>
+                    <button class="chip-btn" data-app-filter="SAFE" onclick="setAppsFilter('SAFE', this)">Safe</button>
+                    <button class="chip-btn" data-app-filter="SUSPICIOUS" onclick="setAppsFilter('SUSPICIOUS', this)">Suspicious</button>
+                    <button class="chip-btn" data-app-filter="MALICIOUS" onclick="setAppsFilter('MALICIOUS', this)">Malicious</button>
+                </div>
+
+                <div id="installed-apps-stack-mobile">
+                    <!-- Dynamic stacked app cards -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 3: SECURITY SCAN                       -->
+            <!-- ========================================== -->
+            <section class="mobile-tab-content" id="tab-scan">
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-robot"></i> Security Scanner</h2>
+                    </div>
+
+                    <div class="scan-preset-bar">
+                        <label><i class="fa-solid fa-bolt"></i> Quick Select App / Academic Scenario</label>
+                        <select id="m-scan-preset-select" onchange="populateScanPreset(this.value)">
+                            <option value="">-- Choose Installed App or Scenario --</option>
+                            <option value="demo_1_safe">Demo 1 — Safe Application (Calculator & Notes Pro)</option>
+                            <option value="demo_2_suspicious">Demo 2 — Suspicious Application (Super Cleaner)</option>
+                            <option value="demo_3_malicious">Demo 3 — Malicious Trojan (Free Premium Banking)</option>
+                        </select>
+                    </div>
+
+                    <form id="m-form-scan" onsubmit="handleMobileScanSubmit(event)">
+                        <div class="m-form-group">
+                            <label>Application Name</label>
+                            <input type="text" id="m-scan-app-name" value="Custom Mobile Test App" required>
+                        </div>
+                        <div class="m-form-group">
+                            <label>Package Name</label>
+                            <input type="text" id="m-scan-pkg-name" value="com.mobile.testsample" required>
+                        </div>
+                        <div class="m-form-group">
+                            <label>APK Hash (SHA-256)</label>
+                            <input type="text" id="m-scan-apk-hash" value="8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92">
+                        </div>
+
+                        <div class="m-form-group">
+                            <label>Permissions Requested</label>
+                            <div class="perms-checkbox-stack">
+                                <label><input type="checkbox" name="m_perms" value="android.permission.SEND_SMS"> SEND_SMS</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.READ_SMS"> READ_SMS</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.ACCESS_FINE_LOCATION"> ACCESS_FINE_LOCATION</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.RECORD_AUDIO"> RECORD_AUDIO</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.CAMERA"> CAMERA</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.READ_CONTACTS"> READ_CONTACTS</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.BIND_DEVICE_ADMIN"> BIND_DEVICE_ADMIN</label>
+                                <label><input type="checkbox" name="m_perms" value="android.permission.SYSTEM_ALERT_WINDOW"> SYSTEM_ALERT_WINDOW</label>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; gap:0.5rem;" class="m-form-group">
+                            <div style="flex:1;">
+                                <label>Network Connections</label>
+                                <input type="number" id="m-scan-net-conn" value="24">
+                            </div>
+                            <div style="flex:1;">
+                                <label>Data Exfil (KB)</label>
+                                <input type="number" id="m-scan-exfil-kb" value="1800">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-mobile btn-primary-m" style="margin-top:0.5rem;" id="m-btn-start-scan">
+                            <i class="fa-solid fa-play"></i> SCAN APPLICATION
+                        </button>
+                    </form>
+                </div>
+
+                <!-- LIVE PROGRESS CONTAINER -->
+                <div class="scan-progress-box" id="m-scan-progress-container" style="display:none;">
+                    <div class="radar-spinner"></div>
+                    <h3 style="font-size:1.1rem; font-weight:800; color:var(--accent-cyan);">ANALYZING APPLICATION...</h3>
+                    <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">Multi-Model AI IDPS Security Pipeline</p>
+
+                    <div class="scan-stage-steps">
+                        <div class="step-item active" id="stage-step-1">
+                            <span class="step-dot"></span>
+                            <span>Scanning application package & structure...</span>
+                        </div>
+                        <div class="step-item" id="stage-step-2">
+                            <span class="step-dot"></span>
+                            <span>Analyzing requested permissions & Android manifest...</span>
+                        </div>
+                        <div class="step-item" id="stage-step-3">
+                            <span class="step-dot"></span>
+                            <span>Running Random Forest, SVM, ANN & Isolation Forest ML models...</span>
+                        </div>
+                        <div class="step-item" id="stage-step-4">
+                            <span class="step-dot"></span>
+                            <span>Evaluating threat decision engine & generating prevention plan...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SCAN RESULT CONTAINER -->
+                <div id="m-scan-result-card-container">
+                    <!-- Dynamic Scan Result Card -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 4: THREATS                             -->
+            <!-- ========================================== -->
+            <section class="mobile-tab-content" id="tab-threats">
+                <div class="m-card-header" style="margin-bottom:0.75rem;">
+                    <h2><i class="fa-solid fa-triangle-exclamation"></i> Security Threats Feed</h2>
+                </div>
+
+                <div class="filter-chips-scroll">
+                    <button class="chip-btn active" data-sev-filter="ALL" onclick="setThreatsFilter('ALL', this)">All</button>
+                    <button class="chip-btn" data-sev-filter="CRITICAL" onclick="setThreatsFilter('CRITICAL', this)">Critical</button>
+                    <button class="chip-btn" data-sev-filter="HIGH" onclick="setThreatsFilter('HIGH', this)">High</button>
+                    <button class="chip-btn" data-sev-filter="MEDIUM" onclick="setThreatsFilter('MEDIUM', this)">Medium</button>
+                    <button class="chip-btn" data-sev-filter="LOW" onclick="setThreatsFilter('LOW', this)">Low</button>
+                </div>
+
+                <div id="threats-feed-mobile">
+                    <!-- Dynamic Mobile Threat Cards -->
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- TAB 5: MORE MENU & SECONDARY VIEWS         -->
+            <!-- ========================================== -->
+            <section class="mobile-tab-content" id="tab-more">
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-bars"></i> Secondary Tools & Features</h2>
+                    </div>
+
+                    <div class="more-nav-list">
+                        <div class="more-nav-item" onclick="switchMobileTab('demo-scenarios')">
+                            <div class="more-nav-item-left">
+                                <div class="more-icon" style="background:rgba(245,158,11,0.15); color:var(--accent-yellow);">
+                                    <i class="fa-solid fa-flask"></i>
+                                </div>
+                                <span>Academic Demo Scenarios</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted" style="font-size:0.8rem;"></i>
+                        </div>
+
+                        <div class="more-nav-item" onclick="switchMobileTab('ml-performance')">
+                            <div class="more-nav-item-left">
+                                <div class="more-icon">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <span>AI / ML Model Performance</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted" style="font-size:0.8rem;"></i>
+                        </div>
+
+                        <div class="more-nav-item" onclick="switchMobileTab('monitoring')">
+                            <div class="more-nav-item-left">
+                                <div class="more-icon" style="background:rgba(16,185,129,0.15); color:var(--accent-green);">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </div>
+                                <span>Real-Time Event Monitor</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted" style="font-size:0.8rem;"></i>
+                        </div>
+
+                        <div class="more-nav-item" onclick="switchMobileTab('alerts')">
+                            <div class="more-nav-item-left">
+                                <div class="more-icon" style="background:rgba(239,68,68,0.15); color:var(--accent-red);">
+                                    <i class="fa-solid fa-bell"></i>
+                                </div>
+                                <span>Threat Notifications & Alerts</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted" style="font-size:0.8rem;"></i>
+                        </div>
+
+                        <div class="more-nav-item" onclick="switchMobileTab('reports')">
+                            <div class="more-nav-item-left">
+                                <div class="more-icon" style="background:rgba(139,92,246,0.15); color:var(--accent-purple);">
+                                    <i class="fa-solid fa-file-shield"></i>
+                                </div>
+                                <span>Security Diagnostic Reports</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-right text-muted" style="font-size:0.8rem;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BACKEND CONNECTION STATUS CARD -->
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-server"></i> Backend Connection</h2>
+                    </div>
+
+                    <div style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+                        <p>FastAPI Engine Address:</p>
+                        <code id="backend-url-display" style="display:block; font-family:var(--font-mono); color:var(--accent-cyan); margin-top:0.2rem; word-break:break-all;">https://intrusiondetector.onrender.com</code>
+                    </div>
+
+
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.85rem;" id="backend-status-info-row">
+                        <span style="font-size:0.8rem;">API Server Status:</span>
+                        <span class="badge badge-safe" id="backend-ping-badge">CONNECTED</span>
+                    </div>
+
+                    <button class="btn-mobile btn-secondary-m btn-sm-m" onclick="checkBackendStatus(true)">
+                        <i class="fa-solid fa-arrows-rotate"></i> Test Backend Connection
+                    </button>
+                </div>
+
+                <!-- ABOUT APP INFO -->
+                <div class="m-card" style="text-align:center;">
+                    <i class="fa-solid fa-shield-halved" style="font-size:2rem; color:var(--accent-cyan); margin-bottom:0.5rem;"></i>
+                    <h3 style="font-size:0.95rem; font-weight:800;">Mobile Intrusion Detection System</h3>
+                    <p style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">Multi-Model AI (RF, SVM, ANN, Isolation Forest)</p>
+                    <p style="font-size:0.7rem; color:var(--text-muted); margin-top:0.5rem;">Version 1.0.0 (Production Build)</p>
+                </div>
+            </section>
+
+            <!-- ========================================== -->
+            <!-- SECONDARY TAB VIEWS (INACCESSIBLE DIRECTLY FROM BOTTOM NAV) -->
+            <!-- ========================================== -->
+            
+            <!-- MONITORING SCREEN -->
+            <section class="mobile-tab-content" id="tab-monitoring">
+                <div class="live-stream-header">
+                    <h2 style="font-size:0.95rem; font-weight:800; display:flex; align-items:center; gap:0.4rem;">
+                        <span class="dot-pulse"></span> LIVE MONITORING
+                    </h2>
+                    <div style="display:flex; gap:0.4rem;">
+                        <button class="btn-mobile btn-secondary-m btn-sm-m" id="btn-toggle-stream" onclick="toggleMonitoringStream()">Pause Stream</button>
+                        <button class="btn-mobile btn-outline-m btn-sm-m" onclick="loadMonitoringEvents()"><i class="fa-solid fa-rotate-right"></i></button>
+                    </div>
+                </div>
+
+                <div id="monitoring-events-stack-mobile">
+                    <!-- Event Cards -->
+                </div>
+            </section>
+
+            <!-- ALERTS SCREEN -->
+            <section class="mobile-tab-content" id="tab-alerts">
+                <div class="m-card-header" style="margin-bottom:0.75rem;">
+                    <h2><i class="fa-solid fa-bell"></i> Security Threat Alerts</h2>
+                </div>
+
+                <div class="filter-chips-scroll">
+                    <button class="chip-btn active" data-alert-filter="ALL" onclick="setAlertsFilter('ALL', this)">All</button>
+                    <button class="chip-btn" data-alert-filter="UNRESOLVED" onclick="setAlertsFilter('UNRESOLVED', this)">Active</button>
+                    <button class="chip-btn" data-alert-filter="RESOLVED" onclick="setAlertsFilter('RESOLVED', this)">Resolved</button>
+                </div>
+
+                <div id="alerts-stack-mobile">
+                    <!-- Notification Alert Cards -->
+                </div>
+            </section>
+
+            <!-- REPORTS SCREEN -->
+            <section class="mobile-tab-content" id="tab-reports">
+                <div class="m-card-header" style="margin-bottom:0.75rem;">
+                    <h2><i class="fa-solid fa-file-shield"></i> Application Security Reports</h2>
+                </div>
+
+                <div id="reports-list-mobile">
+                    <!-- Reports List -->
+                </div>
+            </section>
+
+            <!-- ML PERFORMANCE SCREEN -->
+            <section class="mobile-tab-content" id="tab-ml-performance">
+                <div class="m-card-header" style="margin-bottom:0.75rem;">
+                    <h2><i class="fa-solid fa-brain"></i> AI Model Performance</h2>
+                    <span class="badge badge-info">10K Test Samples</span>
+                </div>
+
+                <div id="ml-performance-cards-mobile">
+                    <!-- Model Metric Cards -->
+                </div>
+            </section>
+
+            <!-- NETWORK SECURITY SCREEN -->
+            <section class="mobile-tab-content" id="tab-network">
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-wifi"></i> Network Security Monitor</h2>
+                    </div>
+
+                    <div style="text-align:center; padding:1rem 0;">
+                        <i class="fa-solid fa-network-wired" style="font-size:2.5rem; color:var(--accent-cyan); margin-bottom:0.5rem;"></i>
+                        <h3 id="net-tab-ssid" style="font-size:1.15rem; font-weight:800;">Connected Network</h3>
+                        <p id="net-tab-transport" style="font-size:0.8rem; color:var(--text-secondary);">Wi-Fi Transport • Protected Protocol</p>
+                        <div style="margin-top:0.75rem;">
+                            <span class="badge badge-safe" id="net-tab-risk-badge" style="font-size:0.85rem; padding:0.4rem 0.8rem;">LOW RISK</span>
+                        </div>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.03); border-radius:12px; padding:0.85rem; margin:0.75rem 0;">
+                        <div style="font-size:0.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.4rem;">OBSERVABLE SECURITY CHARACTERISTICS</div>
+                        <div class="risk-factors-list" id="net-tab-findings-list">
+                            <div class="risk-factor-item">✓ Encrypted Wireless Transport: Active network connection.</div>
+                        </div>
+                    </div>
+
+                    <div style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;" id="net-tab-recommendation">
+                        <strong>Recommendation:</strong> Tap Re-Check Network to analyze current device connection.
+                    </div>
+
+
+                    <div style="display:flex; gap:0.5rem;">
+                        <button class="btn-mobile btn-secondary-m btn-sm-m" onclick="refreshNetworkSecurityStatus()">
+                            <i class="fa-solid fa-arrows-rotate"></i> Re-Check Network
+                        </button>
+                        <button class="btn-mobile btn-primary-m btn-sm-m" onclick="simulateNetworkSwitch()">
+                            <i class="fa-solid fa-bolt"></i> Test Public Wi-Fi Alert
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ROOM / SURVEILLANCE SECURITY SCREEN -->
+            <section class="mobile-tab-content" id="tab-room">
+                <div class="m-card">
+                    <div class="m-card-header">
+                        <h2><i class="fa-solid fa-camera-rotate"></i> Room Security Scan</h2>
+                    </div>
+
+                    <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:0.75rem;">
+                        <strong>Potential Hidden-Camera / Surveillance Device Risk Assessment</strong><br>
+                        Evaluates local network streaming ports (RTSP/ONVIF), camera MAC vendors, and optical reflection.
+                    </p>
+
+                    <div class="room-radar-wrap" id="room-radar-box">
+                        <div class="room-radar-sweep" id="room-radar-sweep" style="display:none;"></div>
+                        <i class="fa-solid fa-eye room-radar-icon"></i>
+                    </div>
+
+                    <div style="text-align:center; margin-bottom:1rem;">
+                        <button class="btn-mobile btn-primary-m" style="width:auto; padding:0.6rem 1.5rem;" id="btn-start-room-scan" onclick="executeRoomSecurityScan()">
+                            <i class="fa-solid fa-radar"></i> START ROOM SCAN
+                        </button>
+                    </div>
+
+                    <div id="room-scan-results-box" style="display:none;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.75rem;">
+                            <span style="font-size:0.9rem; font-weight:700;" id="room-result-status">POTENTIAL RISK</span>
+                            <span class="badge badge-high" id="room-result-score-badge">RISK SCORE: 65/100</span>
+                        </div>
+
+                        <div style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.4rem;">SCAN CHECKS COMPLETED</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem; font-size:0.75rem; margin-bottom:0.85rem;">
+                            <div class="risk-factor-item">Network Scan ✓</div>
+                            <div class="risk-factor-item">Nearby Device Check ✓</div>
+                            <div class="risk-factor-item">Wi-Fi Analysis ✓</div>
+                            <div class="risk-factor-item">Optical Reflection Check ✓</div>
+                        </div>
+
+                        <div style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); margin-bottom:0.4rem;">DETECTED SIGNALS / DEVICES</div>
+                        <div class="risk-factors-list" id="room-detected-devices-list">
+                            <!-- Dynamic detected devices -->
+                        </div>
+
+                        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.75rem; font-style:italic;">
+                            * Note: This assessment evaluates observable network and device indicators. Inspect suspicious physical locations manually.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ACADEMIC DEMO SCENARIOS SCREEN -->
+            <section class="mobile-tab-content" id="tab-demo-scenarios">
+                <div class="m-card-header" style="margin-bottom:0.75rem;">
+                    <h2><i class="fa-solid fa-flask"></i> Reviewer Academic Demo Flow</h2>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">
+                    Interactive demonstration scenarios addressing reviewer evaluation:
+                </p>
+
+                <div id="demo-scenarios-cards-mobile">
+                    <!-- Academic Demo Cards -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========================================== -->
+        <!-- FIXED BOTTOM NAVIGATION BAR                -->
+        <!-- ========================================== -->
+        <nav class="bottom-nav-bar">
+            <button class="nav-tab-btn active" data-tab="home" onclick="switchMobileTab('home')">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="apps" onclick="switchMobileTab('apps')">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <span>Apps</span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="network" onclick="switchMobileTab('network')">
+                <i class="fa-solid fa-wifi"></i>
+                <span>Network</span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="room" onclick="switchMobileTab('room')">
+                <i class="fa-solid fa-camera-rotate"></i>
+                <span>Room</span>
+            </button>
+
+            <button class="nav-tab-btn" data-tab="more" onclick="switchMobileTab('more')">
+                <i class="fa-solid fa-bars"></i>
+                <span>More</span>
+            </button>
+        </nav>
+
+
+        <!-- ========================================== -->
+        <!-- MODALS & SHEET OVERLAYS                    -->
+        <!-- ========================================== -->
+        
+        <!-- REPORT VIEW MODAL -->
+        <div class="modal-overlay" id="report-sheet-modal">
+            <div class="modal-sheet">
+                <div class="modal-sheet-header">
+                    <h3 id="modal-report-title">Security Report</h3>
+                    <button class="close-modal-btn" onclick="closeModalSheet('report-sheet-modal')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-sheet-body" id="modal-report-body">
+                    <!-- Dynamic Report Content -->
+                </div>
+            </div>
+        </div>
+
+        <!-- THREAT INVESTIGATION MODAL -->
+        <div class="modal-overlay" id="threat-sheet-modal">
+            <div class="modal-sheet">
+                <div class="modal-sheet-header">
+                    <h3><i class="fa-solid fa-shield-virus text-red"></i> Threat Investigation</h3>
+                    <button class="close-modal-btn" onclick="closeModalSheet('threat-sheet-modal')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-sheet-body" id="modal-threat-body">
+                    <!-- Dynamic Threat & Prevention Workflow -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- App Logic Script -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+# Python / Pytest Caches & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+ENV/
+env/
+
+# Database & Runtime Data
+*.db
+*.sqlite3
+mobile_idps.db
+*.log
+
+# Environment Files & Secrets
+.env
+.env.local
+.env.*
+*.pem
+*.jks
+*.keystore
+release-key.jks
+keystore.properties
+
+# Android Build Outputs & IDE Files
+android-app/.gradle/
+android-app/build/
+android-app/app/build/
+android-app/local.properties
+.idea/
+*.iml
+.vscode/
+
+# System Files
+.DS_Store
+Thumbs.db
+.backup_phase3/
